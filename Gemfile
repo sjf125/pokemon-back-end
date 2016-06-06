@@ -24,6 +24,7 @@ group :development do
   gem 'rb-readline'
   gem 'spring', '~> 1.6.4'
   gem 'spring-commands-rspec', '~> 1.0.4'
+  gem 'hirb'
 end
 
 group :test do
