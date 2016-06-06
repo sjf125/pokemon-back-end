@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327214720) do
+ActiveRecord::Schema.define(version: 20160606145249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,39 @@ ActiveRecord::Schema.define(version: 20160327214720) do
   end
 
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
+
+  create_table "moves", force: :cascade do |t|
+    t.string   "name"
+    t.string   "type"
+    t.integer  "pp"
+    t.integer  "power"
+    t.integer  "accuracy"
+    t.text     "effect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pokemons", force: :cascade do |t|
+    t.string   "name"
+    t.string   "type1"
+    t.string   "type2"
+    t.integer  "hp"
+    t.integer  "attack"
+    t.integer  "defense"
+    t.integer  "spatk"
+    t.integer  "spdef"
+    t.integer  "speed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "pokemons_id"
+    t.integer  "moves_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false

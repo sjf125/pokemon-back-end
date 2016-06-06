@@ -7,8 +7,8 @@ class CreatePokemons < ActiveRecord::Migration
       t.integer :hp
       t.integer :attack
       t.integer :defense
-      t.integer :special-attack
-      t.integer :special-defense
+      t.integer :spatk
+      t.integer :spdef
       t.integer :speed
 
       t.timestamps null: false
