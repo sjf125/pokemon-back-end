@@ -12,12 +12,13 @@ l = JSON.parse(poketotal.body)['results'].length
 
 
 id = 1
-until id == l.length do
+until id > 3 do
+  puts 'in the loop'
   response = HTTParty.get("http://pokeapi.co/api/v2/pokemon/#{id}")
-
+  h = JSON.parse(response.body)
 
   Pokemon.transaction do
-    response.body do
+    puts 'in it to win it'
       typeone = h['types'].find { |h1| h1['slot'] == 1 }['type']['name']
       typetwo = ''
       if h['types'].length > 1
@@ -36,9 +37,10 @@ until id == l.length do
         spdef: h['stats'].find { |h1| h1['stat']['name'] == 'special-defense' }['base_stat'],
         speed: h['stats'].find { |h1| h1['stat']['name'] == 'speed' }['base_stat']
       }
+      puts pokemon
       Pokemon.create!(pokemon) unless Pokemon.exists?(pokemon)
     end
-  end
+  id += 1
 end
 
 # HTTParty
