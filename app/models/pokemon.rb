@@ -1,6 +1,6 @@
 class Pokemon < ActiveRecord::Base
-  has_many :types, inverse_of: :pokemons
-  has_many :moves, inverse_of: :pokemons
+  has_many :types, inverse_of: :pokemon
+  has_many :moves, inverse_of: :pokemon
 
   def self.find(id)
     response = HTTParty.get("http://pokeapi.co/api/v2/pokemon/#{id}")
@@ -27,13 +27,22 @@ class Pokemon < ActiveRecord::Base
     }
   end
 
-  def self.index
-    response = HTTParty.get("http://pokeapi.co/api/v2/pokemon/")
+  def self.index(total)
+    response = HTTParty.get("http://pokeapi.co/api/v2/pokemon/?limit=#{total}")
     h = JSON.parse(response.body)
     i = 1
+    page = 20
     until i == h['results'].length  do
-       puts("Inside the loop i = #i")
+       puts h['results'][i]['name']
        i += 1
     end
   end
+
+  Pokemon.transaction do
+    response.body.foreach(Rails.root + 'data/people.csv',
+              headers: true) do |person_row|
+        person = person_row.to_hash
+        Person.create!(person) unless Person.exists?(person)
+      end
+    end
 end
