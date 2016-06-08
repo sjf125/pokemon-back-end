@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :poketeams, except: [:new, :edit]
   resources :ratings, except: [:new, :edit]
   resources :comments, except: [:new, :edit]
   resources :moves, except: [:new, :edit]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606204629) do
+ActiveRecord::Schema.define(version: 20160608165329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20160606204629) do
     t.datetime "updated_at", null: false
     t.integer  "pokedex_id"
     t.string   "image"
+  end
+
+  create_table "poketeams", force: :cascade do |t|
+    t.string   "slot1"
+    t.string   "slot2"
+    t.string   "slot3"
+    t.string   "slot4"
+    t.string   "slot5"
+    t.string   "slot6"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ratings", force: :cascade do |t|
