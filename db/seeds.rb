@@ -12,8 +12,7 @@ poketotal = HTTParty.get("http://pokeapi.co/api/v2/pokemon/")
 l = JSON.parse(poketotal.body)['results'].length
 
 id = 1
-until id > 151 do
-  puts 'in the loop'
+until id > 9 do
   response = HTTParty.get("http://pokeapi.co/api/v2/pokemon/#{id}")
   h = JSON.parse(response.body)
 
@@ -35,9 +34,10 @@ until id > 151 do
         spatk: h['stats'].find { |h1| h1['stat']['name'] == 'special-attack' }['base_stat'],
         spdef: h['stats'].find { |h1| h1['stat']['name'] == 'special-defense' }['base_stat'],
         speed: h['stats'].find { |h1| h1['stat']['name'] == 'speed' }['base_stat'],
-        pokedex_id: response['id']
+        pokedex_id: response['id'],
+        image: response['sprites']['front_default']
       }
-      # puts pokemon
+      puts pokemon
 
       if Pokemon.exists?(:name => pokemon[:name]) do
         puts 'its here, updating...'
