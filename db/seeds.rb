@@ -12,7 +12,7 @@ poketotal = HTTParty.get("http://pokeapi.co/api/v2/pokemon/")
 l = JSON.parse(poketotal.body)['results'].length
 
 id = 1
-until id > 9 do
+until id > 151 do
   response = HTTParty.get("http://pokeapi.co/api/v2/pokemon/#{id}")
   h = JSON.parse(response.body)
 
