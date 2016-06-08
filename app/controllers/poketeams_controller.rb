@@ -25,6 +25,7 @@ class PoketeamsController < ProtectedController
     else
       render json: @poketeam.errors, status: :unprocessable_entity
     end
+    current_user.poketeam
   end
 
   # PATCH/PUT /poketeams/1
