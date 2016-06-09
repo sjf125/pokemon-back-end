@@ -4,9 +4,16 @@ class PoketeamsController < ProtectedController
   # GET /poketeams
   # GET /poketeams.json
   def index
-    @poketeams = Poketeam.all
+    # @poketeams = Poketeam.all
 
-    render json: @poketeams
+    poketeam = current_user.poketeam
+
+    if poketeam
+      render json: [poketeam]
+    else
+      render json: []
+    end
+
   end
 
   # GET /poketeams/1
@@ -18,14 +25,13 @@ class PoketeamsController < ProtectedController
   # POST /poketeams
   # POST /poketeams.json
   def create
-    @poketeam = Poketeam.new(poketeam_params)
+    @poketeam = current_user.build_poketeam(poketeam_params)
 
     if @poketeam.save
       render json: @poketeam, status: :created, location: @poketeam
     else
       render json: @poketeam.errors, status: :unprocessable_entity
     end
-    current_user.poketeam
   end
 
   # PATCH/PUT /poketeams/1

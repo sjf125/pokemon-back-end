@@ -1,3 +1,3 @@
 class Poketeam < ActiveRecord::Base
-  belongs_to :user, inverse_of: :poketeams
+  belongs_to :user, inverse_of: :poketeam
 end

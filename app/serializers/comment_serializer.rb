@@ -1,5 +1,5 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :score
+  attributes :id, :content
   has_one :user
   has_one :pokemon
 end
